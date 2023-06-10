@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import { IoMdClose } from 'react-icons/io';
 
 interface RegisterModalStore {
   isOpen: boolean;
