@@ -15,17 +15,22 @@ export default async () => {
       return null;
     }
 
-    const getCurrentUser = await prisma.user.findUnique({
+    const currentUser = await prisma.user.findUnique({
       where: {
         email: session.user.email as string,
       },
     });
 
-    if (!getCurrentUser) {
+    if (!currentUser) {
       return null;
     }
 
-    return getCurrentUser;
+    return {
+      ...currentUser,
+      createdAt: currentUser.createdAt.toISOString(),
+      updatedAt: currentUser.updatedAt.toISOString(),
+      emailVerified: currentUser.emailVerified?.toISOString() || null,
+    };
   } catch (err: any) {
     return null;
   }

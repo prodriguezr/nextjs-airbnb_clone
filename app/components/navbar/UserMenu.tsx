@@ -1,16 +1,16 @@
 'use client';
 
 import { useCallback, useState } from 'react';
+import { signOut } from 'next-auth/react';
 import { AiOutlineMenu } from 'react-icons/ai';
 
 import Avatar from '../Avatar';
 import MenuItem from './MenuItem';
 import { useLoginModal, useRegisterModal } from 'AirbnbClone/app/hooks';
-import { User } from '@prisma/client';
-import { signOut } from 'next-auth/react';
+import { SafeUser } from 'AirbnbClone/app/types';
 
 interface UserMenuProps {
-  currentUser?: User | null;
+  currentUser?: SafeUser | null;
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
