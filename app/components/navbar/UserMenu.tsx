@@ -6,7 +6,11 @@ import { AiOutlineMenu } from 'react-icons/ai';
 
 import Avatar from '../Avatar';
 import MenuItem from './MenuItem';
-import { useLoginModal, useRegisterModal } from 'AirbnbClone/app/hooks';
+import {
+  useLoginModal,
+  useRegisterModal,
+  useRentModal,
+} from 'AirbnbClone/app/hooks';
 import { SafeUser } from 'AirbnbClone/app/types';
 
 interface UserMenuProps {
@@ -16,6 +20,7 @@ interface UserMenuProps {
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
+  const rentModal = useRentModal();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -23,11 +28,19 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     setIsOpen((value) => !value);
   }, []);
 
+  const onRent = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.onOpen();
+    }
+
+    rentModal.onOpen();
+  }, [currentUser, loginModal, rentModal]);
+
   return (
     <div className='relative'>
       <div className='flex flex-row items-center gap-3'>
         <div
-          onClick={() => {}}
+          onClick={onRent}
           className='hidden px-4 py-3 text-sm font-semibold transition rounded-full cursor-pointer md:block hover:bg-neutral-100'
         >
           Airbnb your home
@@ -51,7 +64,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                 <MenuItem label='My favorites' onClick={() => {}} />
                 <MenuItem label='My reservations' onClick={() => {}} />
                 <MenuItem label='My properties' onClick={() => {}} />
-                <MenuItem label='Airbnb my home' onClick={() => {}} />
+                <MenuItem label='Airbnb my home' onClick={rentModal.onOpen} />
                 <hr />
                 <MenuItem label='Logout' onClick={() => signOut()} />
               </>
