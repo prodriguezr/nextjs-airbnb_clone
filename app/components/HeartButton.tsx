@@ -2,6 +2,7 @@
 
 import { SafeUser } from 'AirbnbClone/app/types';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { useFavorite } from '../hooks';
 
 interface HeartButtonProps {
   currentUser?: SafeUser | null;
@@ -10,14 +11,15 @@ interface HeartButtonProps {
 
 const HeartButton: React.FC<HeartButtonProps> = ({
   listingId,
-  currentUser,
+  currentUser = {} as SafeUser,
 }) => {
-  const hasFavorited = true;
-  const toggleFavourite = () => {};
-
+  const { toggleFavorite, hasFavorited } = useFavorite({
+    listingId,
+    currentUser,
+  });
   return (
     <div
-      onClick={toggleFavourite}
+      onClick={toggleFavorite}
       className='relative transition cursor-pointer hover:opacity-80'
     >
       <AiOutlineHeart

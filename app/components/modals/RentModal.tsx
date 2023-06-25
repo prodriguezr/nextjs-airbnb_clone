@@ -133,8 +133,12 @@ const RentModal = () => {
         subtitle='Pick a category'
       />
       <div className='grid grid-cols-1 gap-3 md:grid-cols-2 max-h-[50vh] overflow-y-auto'>
-        {categories.map((item) => (
-          <div id={item.label} className='col-span-1'>
+        {categories.map((item, id) => (
+          <div
+            key={`${id}-${item.label}`}
+            id={item.label}
+            className='col-span-1'
+          >
             <CategoryInput
               onClick={(category) => {
                 setCustomValue('category', category);
