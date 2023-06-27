@@ -2,7 +2,7 @@
 
 import { Listing, Reservation } from '@prisma/client';
 import { useCountries } from 'AirbnbClone/app/hooks';
-import { SafeUser } from 'AirbnbClone/app/types';
+import { SafeListing, SafeUser } from 'AirbnbClone/app/types';
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 import { format } from 'date-fns';
@@ -12,7 +12,7 @@ import Button from '../Button';
 
 interface ListingCardProps {
   currentUser: SafeUser | null;
-  data: Listing;
+  data: SafeListing;
   reservation?: Reservation;
   onAction?: (action: string) => void;
   disabled?: boolean;

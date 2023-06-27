@@ -1,4 +1,5 @@
 import prisma from 'AirbnbClone/app/libs/prismadb';
+import { SafeUser } from '../types';
 
 const getListings = async () => {
   try {
@@ -8,7 +9,12 @@ const getListings = async () => {
       },
     });
 
-    return listings;
+    const safeListings = listings.map((item) => ({
+      ...item,
+      createdAt: item.createdAt.toISOString(),
+    }));
+
+    return safeListings;
   } catch (error: any) {
     throw new Error(error);
   }
