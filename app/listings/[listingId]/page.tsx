@@ -1,6 +1,9 @@
-import { getCurrentUser, getListingById } from 'AirbnbClone/app/actions';
+import {
+  getCurrentUser,
+  getListingById,
+  getReservations,
+} from 'AirbnbClone/app/actions';
 import { ClientOnly, EmptyState } from 'AirbnbClone/app/components';
-import { Listing } from '@prisma/client';
 import ListingClient from './ListingClient';
 
 interface IParams {
@@ -8,6 +11,7 @@ interface IParams {
 }
 
 const ListingPage = async ({ params }: { params: IParams }) => {
+  const reservations = await getReservations(params);
   const currentUser = await getCurrentUser();
   const listing = await getListingById({
     params,
@@ -23,7 +27,11 @@ const ListingPage = async ({ params }: { params: IParams }) => {
 
   return (
     <ClientOnly>
-      <ListingClient listing={listing} currentUser={currentUser} />
+      <ListingClient
+        listing={listing}
+        currentUser={currentUser}
+        reservations={reservations}
+      />
     </ClientOnly>
   );
 };

@@ -1,5 +1,4 @@
 import prisma from 'AirbnbClone/app/libs/prismadb';
-import { SafeUser } from '../types';
 
 const getListings = async () => {
   try {
