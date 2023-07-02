@@ -1,8 +1,7 @@
 'use client';
 
-import { Listing, Reservation } from '@prisma/client';
 import { useCountries } from 'AirbnbClone/app/hooks';
-import { SafeListing, SafeUser } from 'AirbnbClone/app/types';
+import { SafeListing, SafeReservation, SafeUser } from 'AirbnbClone/app/types';
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 import { format } from 'date-fns';
@@ -11,9 +10,9 @@ import HeartButton from '../HeartButton';
 import Button from '../Button';
 
 interface ListingCardProps {
-  currentUser: SafeUser | null;
+  currentUser?: SafeUser | null;
   data: SafeListing;
-  reservation?: Reservation;
+  reservation?: SafeReservation;
   onAction?: (action: string) => void;
   disabled?: boolean;
   actionLabel?: string;
