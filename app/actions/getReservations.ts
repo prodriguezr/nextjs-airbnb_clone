@@ -1,5 +1,4 @@
 import prisma from 'AirbnbClone/app/libs/prismadb';
-import { Listing } from '@prisma/client';
 
 interface IParams {
   listingId?: string;
@@ -7,7 +6,7 @@ interface IParams {
   authorId?: string;
 }
 
-const getReservations = async (params: IParams) => {
+export default async function getReservations(params: IParams) {
   try {
     const { listingId, userId, authorId } = params;
 
@@ -22,7 +21,7 @@ const getReservations = async (params: IParams) => {
     }
 
     if (authorId) {
-      query.Listing = { userId: authorId };
+      query.listing = { userId: authorId };
     }
 
     const reservations = await prisma.reservation.findMany({
@@ -35,21 +34,19 @@ const getReservations = async (params: IParams) => {
       },
     });
 
-    const safeReservations = reservations.map((r) => ({
-      ...r,
-      createdAt: r.createdAt.toISOString(),
-      startDate: r.startDate.toISOString(),
-      endDate: r.endDate.toISOString(),
+    const safeReservations = reservations.map((reservation) => ({
+      ...reservation,
+      createdAt: reservation.createdAt.toISOString(),
+      startDate: reservation.startDate.toISOString(),
+      endDate: reservation.endDate.toISOString(),
       listing: {
-        ...r.listing,
-        createdAt: r.listing.createdAt.toISOString(),
+        ...reservation.listing,
+        createdAt: reservation.listing.createdAt.toISOString(),
       },
     }));
 
     return safeReservations;
-  } catch (err: any) {
-    throw new Error(err);
+  } catch (error: any) {
+    throw new Error(error);
   }
-};
-
-export default getReservations;
+}
