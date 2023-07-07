@@ -1,5 +1,5 @@
-import { getCurrentUser, getReservations } from '../actions';
-import { ClientOnly, EmptyState } from '../components';
+import { getCurrentUser, getReservations } from 'AirbnbClone/app/actions';
+import { ClientOnly, EmptyState } from 'AirbnbClone/app/components';
 import TripsClient from './TripsClient';
 
 const TripsPage = async () => {
