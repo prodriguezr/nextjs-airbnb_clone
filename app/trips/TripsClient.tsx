@@ -5,7 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 
-import { Container, Heading, ListingCard } from '../components';
+import { Container, Heading, ListingCard } from 'AirbnbClone/app/components';
 import { SafeReservation, SafeUser } from '../types';
 
 interface TripsClientProps {
