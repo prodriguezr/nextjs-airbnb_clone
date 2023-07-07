@@ -4,7 +4,7 @@ interface IParams {
   listingId?: string;
 }
 
-export default async ({ params }: { params: IParams }) => {
+export const getListingById = async ({ params }: { params: IParams }) => {
   try {
     const { listingId } = params;
 
@@ -33,3 +33,5 @@ export default async ({ params }: { params: IParams }) => {
     throw new Error(err);
   }
 };
+
+export default getListingById;

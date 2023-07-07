@@ -7,7 +7,7 @@ export const getSession = async () => {
   return getServerSession(authOptions);
 };
 
-export default async () => {
+export const getCurrentUser = async () => {
   try {
     const session = await getSession();
 
@@ -35,3 +35,5 @@ export default async () => {
     return null;
   }
 };
+
+export default getCurrentUser;
